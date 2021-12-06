@@ -4,26 +4,25 @@
 
 package frc.robot.commands;
 
-
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.MotorSubsystem;
 
-public class SpinCommand extends CommandBase {
-  private MotorSubsystem spinningFunction;
-  private Joystick joy;
+public class AutonomousSpin extends CommandBase {
+   private MotorSubsystem autoSpinning;
+   private double motorSpeedLeft;
+   private double motorSpeedRight;
 
-  
-    // Use addRequirements() here to declare subsystem dependencies.
-  public SpinCommand(MotorSubsystem motorSubsys, Joystick joy) {
-      this.spinningFunction =  motorSubsys;
-      this.joy = joy;
-      addRequirements(spinningFunction); 
+  /** Creates a new AutonomousSpin. */
+  public AutonomousSpin(MotorSubsystem autoSubsystem, double speedLeft, double speedRight) {
+    this.autoSpinning = autoSubsystem;
+    motorSpeedLeft = speedLeft;
+    motorSpeedRight = speedRight;
     
+    
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(autoSpinning);
   }
- 
-  
-
 
   // Called when the command is initially scheduled.
   @Override
@@ -32,20 +31,13 @@ public class SpinCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    spinningFunction.spinMotor(joy.getY() * .6, joy.getRawAxis(4) * .6);
-    System.out.println("Right Joy: " + joy.getY());
-    System.out.println("Left Joy: " + joy.getRawAxis(4));
-
-
+    autoSpinning.spinMotor(motorSpeedLeft, motorSpeedRight);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
-    spinningFunction.spinMotor(0,0);
-
+    autoSpinning.spinMotor(0.0, 0.0);
   }
 
   // Returns true when the command should end.
