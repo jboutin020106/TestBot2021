@@ -7,19 +7,20 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 public class MotorSubsystem extends SubsystemBase {
-  private TalonSRX leftSide;
-  private TalonSRX rightSide;
-  private TalonSRX hDriveMotor;
+  private WPI_TalonSRX leftSide;
+  private WPI_TalonSRX rightSide;
+  private WPI_TalonSRX hDriveMotor;
   private boolean toggle = false;
 
   /** Creates a new MotorSubsystem. */
   public MotorSubsystem() {
-    rightSide = new TalonSRX(Constants.rightMotor);
-    leftSide = new TalonSRX(Constants.leftMotor);
-    hDriveMotor = new TalonSRX(Constants.HDriveMotor);
+    rightSide = new WPI_TalonSRX(Constants.rightMotor);
+    leftSide = new WPI_TalonSRX(Constants.leftMotor);
+    hDriveMotor = new WPI_TalonSRX(Constants.HDriveMotor);
     
     rightSide.setInverted(true);
   
