@@ -4,22 +4,19 @@
 
 package frc.robot;
 
-import java.util.function.BooleanSupplier;
+
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.AutonomousSpin;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RotateToAngleCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.SpinCommand;
 import frc.robot.subsystems.MotorSubsystem;
@@ -34,9 +31,6 @@ import frc.robot.subsystems.MotorSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final MotorSubsystem motorSub;
 
@@ -51,8 +45,8 @@ public class RobotContainer {
   private JoystickButton elevatorButton;
 
   private final ElevatorCommand elevatorMove;
-
-  private JoystickButton hDriveButton;
+  
+  private final JoystickButton hDriveButton;
 
   private JoystickButton toggleButton;
 
@@ -85,14 +79,12 @@ public class RobotContainer {
     motorSub = new MotorSubsystem();
 
     elevatorSub = new ElevatorSubsystem();
-
     
     elevatorMove = new ElevatorCommand(elevatorSub);
 
     elevatorButton = new JoystickButton(driveStick, Constants.elevatorButton);
 
-    hDriveButton = new JoystickButton(driveStick, Constants.hDriveButton);
-  
+
   
     spinCom = new SpinCommand(motorSub, driveStick);
     motorSub.setDefaultCommand(spinCom);
