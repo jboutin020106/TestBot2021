@@ -13,6 +13,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.AutonomousSpin;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RotateToAngleCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -54,10 +55,16 @@ public class RobotContainer {
   private JoystickButton hDriveButton;
 
   private JoystickButton toggleButton;
+
+  private JoystickButton rotateToAngleButton;
   
   private Command toggleHDrive;
 
   private Command runAuto;
+
+  private Command rotateToNinety;
+
+  private Command driveRobot;
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -72,6 +79,8 @@ public class RobotContainer {
     elevatorButton = new JoystickButton(driveStick, Constants.elevatorButton);
 
     hDriveButton = new JoystickButton(driveStick, Constants.hDriveButton);
+
+    rotateToAngleButton = new JoystickButton(driveStick, Constants.rotateToAngleButton);
   
     motorSub = new MotorSubsystem();
 
@@ -92,6 +101,12 @@ public class RobotContainer {
     toggleHDrive = new InstantCommand(motorSub::changeToggle,motorSub);
 
     runAuto = new AutonomousCommand(motorSub);
+
+    rotateToNinety = new RotateToAngleCommand(90, motorSub);
+
+    driveRobot = new SpinCommand(motorSub, driveStick);
+
+
     
    
    
@@ -113,11 +128,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
   
-  elevatorButton.whileHeld(elevatorMove);
-  toggleButton.whenPressed(toggleHDrive);
-  
-
-
+    elevatorButton.whileHeld(elevatorMove);
+    toggleButton.whenPressed(toggleHDrive);
+    rotateToAngleButton.whenPressed(rotateToNinety);
+    driveButton.whileHeld(driveRobot);
+    
     
 
   }

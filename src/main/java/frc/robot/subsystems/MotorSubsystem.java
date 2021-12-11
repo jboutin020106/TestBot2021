@@ -9,11 +9,13 @@ import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.kauailabs.navx.frc.AHRS;
 
 public class MotorSubsystem extends SubsystemBase {
   private WPI_TalonSRX leftSide;
   private WPI_TalonSRX rightSide;
   private WPI_TalonSRX hDriveMotor;
+  private AHRS navX;
   private boolean toggle = false;
 
   /** Creates a new MotorSubsystem. */
@@ -21,12 +23,30 @@ public class MotorSubsystem extends SubsystemBase {
     rightSide = new WPI_TalonSRX(Constants.rightMotor);
     leftSide = new WPI_TalonSRX(Constants.leftMotor);
     hDriveMotor = new WPI_TalonSRX(Constants.HDriveMotor);
-    
+    navX = new AHRS();
     rightSide.setInverted(true);
   
   
 
   }
+    
+  
+    public AHRS getNavX(){
+      return navX;
+    }
+
+    public void zeroNavX(){
+      navX.reset();
+    }
+
+    public double getNavXAngle(){
+      System.out.println(navX.getYaw());
+      return navX.getYaw();
+    }
+
+  
+
+
 
 
  
@@ -49,5 +69,6 @@ public class MotorSubsystem extends SubsystemBase {
     toggle = !toggle;
     System.out.println(toggle);
   }
+
 
 }

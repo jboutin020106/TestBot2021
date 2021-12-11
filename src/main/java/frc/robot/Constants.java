@@ -16,11 +16,12 @@ public final class Constants {
     public static final int leftMotor = 5;
     public static final int rightMotor = 6;
     public static final int driveButton = 1;
+    public static final int hDriveButton = 8;
     public static final int driveStick = 2;
     public static final int chainMotor = 7;
     public static final int elevatorButton = 7;
     public static final int HDriveMotor = 8;
-    public static final int hDriveButton = 1;
     public static final int toggleButton = 4;
+    public static final int rotateToAngleButton = 3;
 
 }
