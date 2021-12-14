@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.MotorSubsystem;
 
@@ -32,12 +33,14 @@ public class AutonomousSpin extends CommandBase {
   @Override
   public void execute() {
     autoSpinning.spinMotor(motorSpeedLeft, motorSpeedRight);
+    SmartDashboard.putNumber("Autonomous Driving Speed", motorSpeedLeft);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     autoSpinning.spinMotor(0.0, 0.0);
+    SmartDashboard.putNumber("Driving speed", motorSpeedLeft);
   }
 
   // Returns true when the command should end.

@@ -6,12 +6,17 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.MotorSubsystem;
 
 public class SpinCommand extends CommandBase {
   private MotorSubsystem spinningFunction;
   private Joystick joy;
+ 
+
+  
 
   
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,6 +41,8 @@ public class SpinCommand extends CommandBase {
     spinningFunction.spinMotor(joy.getY() * .6, joy.getRawAxis(4) * .6);
     System.out.println("Right Joy: " + joy.getY());
     System.out.println("Left Joy: " + joy.getRawAxis(4));
+    SmartDashboard.putNumber("Right motor teleop speed", joy.getY());
+    SmartDashboard.putNumber("Left motor teleop speed", joy.getRawAxis(4));
 
 
   }
@@ -45,6 +52,8 @@ public class SpinCommand extends CommandBase {
   public void end(boolean interrupted) {
     
     spinningFunction.spinMotor(0,0);
+    SmartDashboard.putNumber("Right motor teleop speed", joy.getY());
+    SmartDashboard.putNumber("Left motor teleop speed", joy.getRawAxis(4));
 
   }
 

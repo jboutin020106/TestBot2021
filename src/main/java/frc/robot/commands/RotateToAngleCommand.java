@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.MotorSubsystem;
 
@@ -81,6 +82,8 @@ public class RotateToAngleCommand extends CommandBase {
       else{
         rotateSubsystem.spinMotor(currentDrivingSpeed * -1.0, currentDrivingSpeed);
       }
+
+      SmartDashboard.putNumber("Current Angle", rotateSubsystem.getNavXAngle());
   }
 
   public boolean isFinished() {
@@ -96,6 +99,7 @@ public class RotateToAngleCommand extends CommandBase {
 
   protected void end(){
     rotateSubsystem.spinMotor(0.0, 0.0);
+    SmartDashboard.putNumber("Current Angle", rotateSubsystem.getNavXAngle());
   }
 
   // Called once the command ends or is interrupted.
